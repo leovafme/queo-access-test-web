@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useApiService } from "../Store";
 
 const schema = yup.object().shape({
     name: yup.string().required().min(3).max(50),
@@ -17,17 +18,36 @@ const toBase64 = file => new Promise((resolve, reject) => {
 });
 
 const Company = () => {
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(schema)
     });
+
+    const { companyService } = useApiService()
 
     const onSubmit = async data => {
         if (data.logo && data.logo[0]) {
             data.logo = await toBase64(data.logo[0]);
+            // only plain tex
+            data.logo = data.logo.split(",")[1]
         } else {
             data.logo = undefined;
         }
-        console.log(data)
+        
+        try {
+            const response = await companyService.createCompany(data);
+            
+            if (response.success) {
+                reset();
+                setLogo(null);
+                alert("ok save record :D")
+            } else {
+                alert("error exeption")
+                alert(JSON.stringify(response.message))
+            }
+            
+        } catch (error) {
+            alert(error)
+        }
     };
 
     const [logo, setLogo] = useState();
