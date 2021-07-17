@@ -18,9 +18,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AuthenticationButton from '../components/AuthenticationButton';
 import List from '@material-ui/core/List';
-import { mainListItems } from '../components/ListItems';
+import { mainListItems, optionsListItems } from '../components/ListItems';
 import CompaniesView from './Companies';
-import { NoMatch } from './NoMatch';
 
 function Copyright() {
     return (
@@ -174,8 +173,8 @@ export default function Dashboard() {
                             <Grid container spacing={3}>
                                 <Grid item xs={12} md={12} lg={12}>
                                     <Paper className={fixedHeightPaper}>
-                                        <p>Who admin today?</p>
-                                        <Link to={`${url}/companies`}>Companies</Link>
+                                        <p>What do you want to manage?</p>
+                                        {optionsListItems}
                                     </Paper>
                                 </Grid>
                             </Grid>

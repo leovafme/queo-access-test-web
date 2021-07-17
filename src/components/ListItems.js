@@ -7,6 +7,24 @@ import PeopleIcon from '@material-ui/icons/People';
 import BusinessIcon from '@material-ui/icons/Business';
 import { Link as RouterLink } from 'react-router-dom';
 
+export const optionsListItems = (
+    <>
+      <ListItem button component={RouterLink} to='/dashboard/companies'>
+        <ListItemIcon>
+          <BusinessIcon />
+        </ListItemIcon>
+        <ListItemText primary="Companies" />
+      </ListItem>
+      <ListItem button component={RouterLink} to='/'>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Employees" />
+      </ListItem>
+    </>
+);
+  
+
 export const mainListItems = (
   <div>
     <ListItem button component={RouterLink} to='/'>
@@ -15,17 +33,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button component={RouterLink} to='/dashboard/companies'>
-      <ListItemIcon>
-        <BusinessIcon />
-      </ListItemIcon>
-      <ListItemText primary="Companies" />
-    </ListItem>
-    <ListItem button component={RouterLink} to='/'>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Employees" />
-    </ListItem>
+    {optionsListItems}
   </div>
 );
+
