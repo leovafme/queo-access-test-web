@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import Loading from "./components/Loading";
 import { NoMatch } from "./views/NoMatch";
 import { ProfileView } from "./views/ProfileView";
+import HomeView from "./views/Home";
 
 import "./App.css";
 
@@ -31,7 +32,7 @@ const App = () => {
       <Nav />
       <div className="container flex-grow-1">
         <Switch>
-          <Route path="/" exact component={() => <p>home</p>} />
+          <Route path="/" exact component={HomeView} />
           <Route path="/profile" component={ProfileView} />
           <Route path="*">
             <NoMatch />
