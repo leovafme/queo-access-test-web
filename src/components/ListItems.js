@@ -15,7 +15,7 @@ export const optionsListItems = (
         </ListItemIcon>
         <ListItemText primary="Companies" />
       </ListItem>
-      <ListItem button component={RouterLink} to='/'>
+      <ListItem button component={RouterLink} to='/dashboard'>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
@@ -27,7 +27,7 @@ export const optionsListItems = (
 
 export const mainListItems = (
   <div>
-    <ListItem button component={RouterLink} to='/'>
+    <ListItem button component={RouterLink} to='/dashboard'>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
