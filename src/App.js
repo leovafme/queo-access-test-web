@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import Nav from "./components/Nav";
 import Loading from "./components/Loading";
 import { NoMatch } from "./views/NoMatch";
-import { ProfileView } from "./views/ProfileView";
-import HomeView from "./views/Home";
-import CompaniesView from "./views/Companies";
+import DashboardView from "./views/Dashboard";
 
 import "./App.css";
 
@@ -29,20 +26,14 @@ const App = () => {
   }
 
   return (
-    <div id="app" className="d-flex flex-column h-100">
-      <Nav />
-      <br></br>
-      <div className="container flex-grow-1">
-        <Switch>
-          <Route path="/" exact component={HomeView} />
-          <Route path="/profile" component={ProfileView} />
-          <Route path="/companies" component={CompaniesView} />
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        {isAuthenticated ? <Redirect to="/dashboard" /> : <p>Public page</p>}
+      </Route>
+
+      <Route path="/dashboard" component={DashboardView} />
+      <Route component={NoMatch} />
+    </Switch>
   );
 };
 

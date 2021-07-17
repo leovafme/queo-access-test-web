@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import IconButton from '@material-ui/core/IconButton';
 
 function LoginButton() {
   const {
@@ -14,7 +16,9 @@ function LoginButton() {
   }, [isAuthenticated, loginWithRedirect])
 
   return !isAuthenticated && (
-    <button onClick={loginWithRedirect}>Log in</button>
+    <IconButton color="inherit" onClick={loginWithRedirect}>
+      <VpnKeyIcon />
+    </IconButton>
   );
 }
 

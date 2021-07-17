@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useApiService } from "../Store";
+import { Button, Input } from '@material-ui/core';
 
 const schema = yup.object().shape({
     name: yup.string().required().min(3).max(50),
@@ -18,7 +19,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 });
 
 const Company = () => {
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue, reset, control } = useForm({
         resolver: yupResolver(schema)
     });
 
@@ -95,19 +96,39 @@ const Company = () => {
             {logo? <img src={logo} width="100"></img>: null }
             {errors.logo && <span>Invalid logo</span>}
             <br></br>
-            <input {...register("name")} placeholder="Company name" />
+            <Controller
+                name="name"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <Input {...field} />}
+                placeholder="Company name"
+            />
+            
             {errors.name && <span>Name is required</span>}
             
             <br></br>
+
+            <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <Input {...field} />}
+                placeholder="Company email"
+            />
             
-            <input type="email" {...register("email")} placeholder="Company email" />
             {errors.email && <span>Email is required</span>}
             
             <br></br>
-            <input name="website" {...register("website")} placeholder="Company website" />
-            <br></br>
 
-            <input type="submit" />
+            <Controller
+                name="website"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <Input {...field} />}
+                placeholder="Company website"
+            />
+            <br></br>
+            <Button color="primary" type="submit">Save</Button>
         </form>
     );
 };
