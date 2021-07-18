@@ -20,6 +20,7 @@ import AuthenticationButton from '../components/AuthenticationButton';
 import List from '@material-ui/core/List';
 import { mainListItems, optionsListItems } from '../components/ListItems';
 import CompaniesView from './Companies';
+import EmployeesView from './Employees';
 
 function Copyright() {
     return (
@@ -180,6 +181,7 @@ export default function Dashboard() {
                             </Grid>
                         </Route>
                         <Route path={`${path}/companies`} component={CompaniesView} />
+                        <Route path={`${path}/employees`} component={EmployeesView} />
                     </Switch>
                     <Box pt={4}>
                         <Copyright />

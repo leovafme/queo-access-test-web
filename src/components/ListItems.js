@@ -15,7 +15,7 @@ export const optionsListItems = (
         </ListItemIcon>
         <ListItemText primary="Companies" />
       </ListItem>
-      <ListItem button component={RouterLink} to='/dashboard'>
+      <ListItem button component={RouterLink} to='/dashboard/employees'>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
