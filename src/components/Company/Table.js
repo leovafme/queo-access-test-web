@@ -10,8 +10,7 @@ function TableCompany() {
         const confirmationDelete = window.confirm("Do you really delete record?");
 
         if (!confirmationDelete) return;
-
-        console.log(id)
+        await companyService.delete(id);
     }
 
     const columns = useMemo(

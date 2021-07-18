@@ -35,6 +35,19 @@ class CompanyService {
       return response.data;
     });
   }
+
+  /**
+   * @method delete create company
+   * @return {Promise} result object providers
+   */
+   async delete(id) {
+    return this.config.API.delete(`/${id}`).then(response => {
+      if (response.status !== 200) {
+        return this.config.handleResponseError(response);
+      }
+      return response.data;
+    });
+  }
 }
 
 export default CompanyService;
