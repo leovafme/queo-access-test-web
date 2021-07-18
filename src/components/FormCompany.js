@@ -86,11 +86,16 @@ const FormCompany = ({ id }) => {
 
         try {
             setLoading(true);
-            const response = await companyService.createCompany(data);
-
+            let response; 
+            if (id) {
+                response = await companyService.edit(id, data);
+            } else {
+                response = await companyService.createCompany(data);
+            }
+            
             if (response.success) {
-                reset();
-                setLogo(null);
+                // if not is edit clear form
+                if (!id) clearForm();
                 alert("ok save record :D")
             } else {
                 alert("error exeption")
@@ -103,6 +108,11 @@ const FormCompany = ({ id }) => {
 
         setLoading(false);
     };
+
+    const clearForm = () => {
+        reset();
+        setLogo(null);
+    }
 
     function isGoodImage(event) {
         var _URL = window.URL || window.webkitURL;

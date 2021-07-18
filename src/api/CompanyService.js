@@ -61,6 +61,19 @@ class CompanyService {
       return response.data;
     });
   }
+
+  /**
+   * @method edit patch company by id
+   * @return {Promise} result object ok or failed
+   */
+   async edit(id, company) {
+    return this.config.API.patch(`/${id}`, company).then(response => {
+      if (response.status !== 200) {
+        return this.config.handleResponseError(response);
+      }
+      return response.data;
+    });
+  }
 }
 
 export default CompanyService;
