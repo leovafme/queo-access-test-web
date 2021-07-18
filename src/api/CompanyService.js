@@ -6,16 +6,11 @@ class CompanyService {
   }
 
   /**
-   * @method getCompanies list companies
+   * @method all list companies
    * @return {Promise} result object providers
    */
-  async getCompanies(take = 5, skip = 0) {
-    return this.config.API.get(``, {
-      params: {
-        skip,
-        take
-      }
-    }).then(response => {
+  async all() {
+    return this.config.API.get(``).then(response => {
       if (response.status !== 200) {
         return this.config.handleResponseError(response);
       }

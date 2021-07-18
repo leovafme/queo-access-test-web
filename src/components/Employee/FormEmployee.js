@@ -45,7 +45,7 @@ const FormEmployee = ({ id }) => {
 
     const listCompaniesForSelect = async () => {
         try {
-            const response = await companyService.getCompanies();
+            const response = await companyService.all();
             const parselistCompanies = response.result.map((company) => {
                 return {value: company.id , label: company.name };
             })

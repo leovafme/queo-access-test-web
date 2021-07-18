@@ -4,11 +4,27 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
+import TableEmployee from '../components/Employee/Table';
+import { Link as RouterLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 import FormEmployee from '../components/Employee/FormEmployee';
 
 const EmployeePreview = () => {
-    return <><FormEmployee /></>
+    let { path } = useRouteMatch();
+    let history = useHistory();
+
+    const onEdit = id => {
+        history.push(`${path}/edit/${id}`);
+    }
+
+    return <>
+        <Button component={RouterLink} to={`${path}/new`} variant="contained" size="small" color="primary">
+            New Employee
+        </Button>
+        <br></br><br></br>
+        <TableEmployee style={{ with: '100%' }} onEdit={onEdit} />
+    </>
 }
 
 const EmployeeEditor = () => {

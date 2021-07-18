@@ -27,7 +27,7 @@ function Table({columns, serviceCall, forceUpdate}) {
     const findAll = useCallback(async () => {
         try {
             handleToggle();
-            const response = await serviceCall.getCompanies();
+            const response = await serviceCall.all();
             if (response.success) setData(response.result);
         } catch (e) {
             console.log(e, serviceCall)
@@ -59,7 +59,7 @@ function Table({columns, serviceCall, forceUpdate}) {
         <Backdrop className={classes.backdrop} open={open}>
             <CircularProgress color="inherit" />
         </Backdrop>
-        <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+        <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%' }}>
             <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
