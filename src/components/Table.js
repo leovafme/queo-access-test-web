@@ -27,7 +27,7 @@ function Table({columns, serviceCall}) {
     } = useTable({ columns, data })
 
     return (
-        <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '98%', margin: '1%' }}>
+        <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
             <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
