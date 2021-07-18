@@ -192,7 +192,15 @@ const FormCompany = ({ id }) => {
                 name="website"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <TextField {...field} label="Company website" variant="outlined" size="small" />}
+                
+                render={({ field }) => <TextField
+                    error={errors && errors.website ? true : false}
+                    {...field}
+                    label="Company website"
+                    variant="outlined"
+                    size="small"
+                    helperText={errors && errors.website ? "Invalid Field" : null}
+                />}
             />
 
             <br></br>
