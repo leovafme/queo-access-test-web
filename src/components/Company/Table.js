@@ -69,7 +69,7 @@ function TableCompany({ onEdit }) {
                         </Button>
                     </div>
                 ),
-                Header: "Acciones",
+                Header: "Actions",
                 accessor: "id",
             }
         ],

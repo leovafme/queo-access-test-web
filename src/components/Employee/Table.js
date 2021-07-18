@@ -70,7 +70,7 @@ function TableEmployee({ onEdit }) {
                         </Button>
                     </div>
                 ),
-                Header: "Acciones",
+                Header: "Acctions",
                 accessor: "id",
             }
         ],
