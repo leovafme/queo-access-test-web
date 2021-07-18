@@ -4,7 +4,7 @@ import TableFactory from "../Table";
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
-function TableCompany() {
+function TableCompany({ onEdit }) {
     const { companyService } = useApiService();
     const [forceUpdate, setForceUpdate] = useState();
     const [inAction, setInAction] = useState(false);
@@ -28,9 +28,9 @@ function TableCompany() {
     },[companyService])
 
     const editRecord = useCallback(async id => {
-        console.log(id)
-        setInAction(true)
-    },[])
+        // possible other logic implmentation
+        onEdit(id)
+    }, [onEdit])
 
     const columns = useMemo(
         () => [
@@ -77,6 +77,10 @@ function TableCompany() {
     )
 
     return <TableFactory columns={columns} serviceCall={companyService} forceUpdate={forceUpdate} />
+}
+
+TableCompany.defaultProps = {
+    onEdit: id => console.log(id)
 }
 
 export default TableCompany;

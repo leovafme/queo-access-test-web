@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -6,6 +6,7 @@ import { useApiService } from "../Store";
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const schema = yup.object().shape({
     name: yup.string().required().min(3).max(50),
@@ -43,14 +44,36 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const FormCompany = () => {
+const FormCompany = ({ id }) => {
     const classes = useStyles();
-
+    const [logo, setLogo] = useState();
+    const [loading, setLoading] = useState(false);
+    const { companyService } = useApiService()
     const { register, handleSubmit, formState: { errors }, setValue, reset, control } = useForm({
         resolver: yupResolver(schema)
     });
 
-    const { companyService } = useApiService()
+    const findRecordById = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await companyService.get(id);
+            if (!response.success) throw new Error('¡Ups!');
+
+            setValue("name", response.result.name || "");
+            setValue("email", response.result.email || "");
+            setValue("website", response.result.website || "");
+            setLogo(response.result.logo)
+        } catch (e) {
+            console.log(e)
+            alert("Error find record by id D:")
+        }
+        setLoading(false);
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        if(id && companyService) findRecordById();
+    }, [id, companyService, findRecordById])
 
     const onSubmit = async data => {
         if (data.logo && data.logo[0]) {
@@ -62,6 +85,7 @@ const FormCompany = () => {
         }
 
         try {
+            setLoading(true);
             const response = await companyService.createCompany(data);
 
             if (response.success) {
@@ -76,9 +100,9 @@ const FormCompany = () => {
         } catch (error) {
             alert(error)
         }
-    };
 
-    const [logo, setLogo] = useState();
+        setLoading(false);
+    };
 
     function isGoodImage(event) {
         var _URL = window.URL || window.webkitURL;
@@ -115,7 +139,6 @@ const FormCompany = () => {
         image.src = _URL.createObjectURL(file);
         setLogo(image.src)
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.root}>
@@ -164,7 +187,8 @@ const FormCompany = () => {
 
             <br></br>
 
-            <Button variant="contained" color="primary" type="submit" disableElevation>Save</Button>
+            <Button variant="contained" color="primary" type="submit" disableElevation disabled={loading}>Save</Button>
+            {loading? <CircularProgress /> : null}
         </form>
     );
 };

@@ -48,6 +48,19 @@ class CompanyService {
       return response.data;
     });
   }
+
+  /**
+   * @method get find company by id
+   * @return {Promise} result object company record
+   */
+   async get(id) {
+    return this.config.API.get(`/${id}`).then(response => {
+      if (response.status !== 200) {
+        return this.config.handleResponseError(response);
+      }
+      return response.data;
+    });
+  }
 }
 
 export default CompanyService;
