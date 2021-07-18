@@ -2,6 +2,10 @@
 
 This project web for queo access test
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/45b8a530-d524-4abf-9286-9e9a8aa745cb/deploy-status)](https://app.netlify.com/sites/gallant-ride-b170a7/deploys)
+
+Demo [https://gallant-ride-b170a7.netlify.app](https://gallant-ride-b170a7.netlify.app)
+
 ## Available Scripts
 
 In the project directory, you can run:
